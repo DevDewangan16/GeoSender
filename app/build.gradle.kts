@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.org.jetbrains.kotlin.android)
@@ -19,7 +21,11 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
+        // Add manifest placeholders for Maps API key
+        manifestPlaceholders["MAPS_API_KEY"] = project.properties["MAPS_API_KEY"] as? String ?: ""
+        buildConfigField("String", "MAPS_API_KEY", "\"${project.properties["MAPS_API_KEY"]}\"")
     }
+
 
     buildTypes {
         release {
@@ -38,7 +44,7 @@ android {
         jvmTarget = "1.8"
     }
     buildFeatures {
-        viewBinding=true
+        buildConfig = true
         compose = true
     }
     composeOptions {
