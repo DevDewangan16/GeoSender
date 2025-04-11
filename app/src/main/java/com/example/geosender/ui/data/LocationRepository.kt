@@ -1,18 +1,11 @@
 package com.example.geosender.ui.data
 
-class LocationRepository {
+import retrofit2.Response
+
+class LocationRepository(apiService: ApiService) {
     private val apiService = ApiClient.apiService
 
-    suspend fun submitLocation(location: LocationData): Result<ApiResponse> {
-        return try {
-            val response = apiService.submitLocation(location)
-            if (response.isSuccessful) {
-                Result.success(response.body()!!)
-            } else {
-                Result.failure(Exception("Failed to submit location"))
-            }
-        } catch (e: Exception) {
-            Result.failure(e)
-        }
+    suspend fun submitLocation(location: LocationData): Response<ApiResponse> {
+        return apiService.submitLocation(location)
     }
 }

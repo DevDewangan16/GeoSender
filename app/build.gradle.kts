@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.org.jetbrains.kotlin.android)
     alias(libs.plugins.compose.compiler)
+    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -52,10 +53,29 @@ android {
     }
     packaging {
         resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+            excludes += setOf(
+                "/META-INF/{AL2.0,LGPL2.1}",
+                "/META-INF/gradle/incremental.annotation.processors",
+                "META-INF/DEPENDENCIES",
+                "META-INF/LICENSE",
+                "META-INF/LICENSE.txt",
+                "META-INF/license.txt",
+                "META-INF/NOTICE",
+                "META-INF/NOTICE.txt",
+                "META-INF/notice.txt",
+                "META-INF/ASL2.0",
+                "META-INF/*.kotlin_module"
+            )
         }
     }
 }
+
+configurations.all {
+    exclude(group = "com.google.android.gms", module = "play-services-ads")
+    exclude(group = "com.google.android.gms", module = "play-services-ads-lite")
+    exclude(group = "com.google.android.gms", module = "play-services-ads-identifier")
+}
+
 
 dependencies {
 
@@ -90,4 +110,11 @@ dependencies {
     implementation("com.google.maps.android:maps-compose:2.14.0")
     implementation("com.google.android.gms:play-services-maps:19.1.0")
     implementation("com.google.accompanist:accompanist-permissions:0.30.1")
+
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.7.3")
+
+    // Hilt
+    implementation("com.google.dagger:hilt-android:2.48")
+    implementation("com.google.dagger:hilt-android-compiler:2.48")
+    implementation("androidx.hilt:hilt-navigation-compose:1.1.0")
 }
