@@ -97,7 +97,10 @@ fun HomeScreen(
                     onClick = {
                         showLocationDisabledDialog = false
                         context.startActivity(Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS))
-                    }
+                    },
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = Color(0xFF00BB77)
+                    )
                 ) {
                     Text("Open Settings")
                 }
@@ -117,7 +120,9 @@ fun HomeScreen(
                 .padding(16.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            Spacer(modifier = Modifier.fillMaxWidth().height(20.dp))
+            Spacer(modifier = Modifier
+                .fillMaxWidth()
+                .height(20.dp))
             Text(
                 text = "Select Your Location",
                 style = MaterialTheme.typography.headlineSmall
@@ -129,12 +134,14 @@ fun HomeScreen(
             if (isGettingLocation) {
                 Button(
                     onClick = {},
-                    modifier = Modifier.fillMaxWidth(),
+                    modifier = Modifier.fillMaxWidth()
+                        .height(56.dp),
+                    shape = MaterialTheme.shapes.medium,
                     enabled = false
                 ) {
                     CircularProgressIndicator(
                         modifier = Modifier.size(24.dp),
-                        color = MaterialTheme.colorScheme.onPrimary,
+                        color = Color(0xFF00BB77),
                         strokeWidth = 2.dp
                     )
                 }
@@ -204,7 +211,7 @@ fun HomeScreen(
                     if (isLoading) {
                         CircularProgressIndicator(
                             modifier = Modifier.size(24.dp),
-                            color = MaterialTheme.colorScheme.onPrimary,
+                            color = Color(0xFF0066CC),
                             strokeWidth = 2.dp
                         )
                     } else {
