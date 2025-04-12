@@ -15,13 +15,6 @@ interface ApiService {
         @Body request: Map<String, String>
     ): retrofit2.Response<ApiResponse>
 }
-//interface ApiService {
-//    @POST("api/submit-location")
-//    suspend fun submitLocation(
-//        @Body location: LocationData
-//    ): retrofit2.Response<ApiResponse>
-//}
-//
 data class ApiResponse(
     val success: Boolean,
     val message: String

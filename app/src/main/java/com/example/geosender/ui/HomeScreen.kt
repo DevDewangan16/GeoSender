@@ -41,6 +41,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.sp
 import androidx.core.content.ContextCompat
 
 
@@ -223,7 +224,7 @@ fun HomeScreen(
                             strokeWidth = 2.dp
                         )
                     } else {
-                        Text("Submit Location")
+                        Text("Submit Location",fontSize = 15.sp)
                     }
                 }
             }

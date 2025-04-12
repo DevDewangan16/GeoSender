@@ -52,7 +52,7 @@ fun LocationButton(
                 modifier = Modifier.size(24.dp)
             )
             Spacer(modifier = Modifier.width(8.dp))
-            Text(text = text)
+            Text(text = text, fontSize = 15.sp)
         }
     }
 }

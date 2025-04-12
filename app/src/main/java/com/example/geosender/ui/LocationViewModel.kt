@@ -57,39 +57,11 @@ class LocationViewModel(
         reverseGeocode(location)
     }
 
-//    fun setLocation(location: LocationData) {
-//        _locationState.value = location
-//    }
-
     fun setErrorMsg(errorMessage:String){
         _errorMessage.value=errorMessage
     }
 
-//    fun submitLocation() {
-//        _locationState.value?.let { location ->
-//            viewModelScope.launch {
-//                _isLoading.value = true
-//                _errorMessage.value = null
-//                _successMessage.value = null
-//
-//                try {
-//                    val response = repository.submitLocation(location)
-//                    if (response.isSuccessful) {
-//                        _successMessage.value = "Location submitted successfully"
-//                    } else {
-//                        _errorMessage.value = "Failed to submit location: ${response.errorBody()?.string() ?: response.code().toString()}"
-//                    }
-//                } catch (e: Exception) {
-//                    _errorMessage.value = "Error: ${e.message ?: "Unknown error"}"
-//                } finally {
-//                    _isLoading.value = false
-//                }
-//            }
-//        } ?: run {
-//            _errorMessage.value = "No location selected"
-//        }
-//    }
-fun submitLocation() {
+    fun submitLocation() {
     _locationState.value?.let { location ->
         viewModelScope.launch {
             _isLoading.value = true
@@ -122,7 +94,7 @@ fun submitLocation() {
             }
         }
     }
-}
+    }
 
     fun clearMessages() {
         _errorMessage.value = null
