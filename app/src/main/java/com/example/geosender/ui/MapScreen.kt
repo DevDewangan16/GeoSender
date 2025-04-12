@@ -19,11 +19,10 @@ import com.example.geosender.ui.data.LocationData
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.compose.*
-
 @OptIn(MapsComposeExperimentalApi::class, ExperimentalMaterial3Api::class)
 @Composable
 fun MapScreen(
-    onLocationSelected: (LocationData) -> Unit,
+    viewModel: LocationViewModel,  // Add ViewModel parameter
     onBack: () -> Unit,
     initialLocation: LocationData? = null
 ) {
@@ -52,12 +51,14 @@ fun MapScreen(
             FloatingActionButton(
                 onClick = {
                     selectedLocation?.let { latLng ->
-                        onLocationSelected(
+                        // Update the ViewModel with selected location
+                        viewModel.setLocation(
                             LocationData(
                                 latitude = latLng.latitude,
                                 longitude = latLng.longitude
                             )
                         )
+                        onBack()  // Navigate back after setting location
                     }
                 }
             ) {
@@ -65,6 +66,7 @@ fun MapScreen(
             }
         }
     ) { paddingValues ->
+        // ... rest of your MapScreen code ...
         Box(modifier = Modifier.padding(paddingValues)) {
             GoogleMap(
                 modifier = Modifier.fillMaxSize(),
@@ -104,6 +106,92 @@ fun MapScreen(
         }
     }
 }
+
+//@OptIn(MapsComposeExperimentalApi::class, ExperimentalMaterial3Api::class)
+//@Composable
+//fun MapScreen(
+//    onLocationSelected: (LocationData) -> Unit,
+//    onBack: () -> Unit,
+//    initialLocation: LocationData? = null
+//) {
+//    val initialLatLng = initialLocation?.let {
+//        LatLng(it.latitude, it.longitude)
+//    } ?: LatLng(0.0, 0.0)
+//
+//    val cameraPositionState = rememberCameraPositionState {
+//        position = CameraPosition.fromLatLngZoom(initialLatLng, 15f)
+//    }
+//
+//    var selectedLocation by remember { mutableStateOf<LatLng?>(initialLatLng) }
+//
+//    Scaffold(
+//        topBar = {
+//            TopAppBar(
+//                title = { Text("Select Location") },
+//                navigationIcon = {
+//                    IconButton(onClick = onBack) {
+//                        Icon(Icons.Default.ArrowBack, contentDescription = "Back")
+//                    }
+//                }
+//            )
+//        },
+//        floatingActionButton = {
+//            FloatingActionButton(
+//                onClick = {
+//                    selectedLocation?.let { latLng ->
+//                        onLocationSelected(
+//                            LocationData(
+//                                latitude = latLng.latitude,
+//                                longitude = latLng.longitude
+//                            )
+//                        )
+//                    }
+//                }
+//            ) {
+//                Icon(Icons.Default.Check, contentDescription = "Confirm Location")
+//            }
+//        }
+//    ) { paddingValues ->
+//        Box(modifier = Modifier.padding(paddingValues)) {
+//            GoogleMap(
+//                modifier = Modifier.fillMaxSize(),
+//                cameraPositionState = cameraPositionState,
+//                properties = MapProperties(
+//                    isMyLocationEnabled = true
+//                ),
+//                uiSettings = MapUiSettings(
+//                    zoomControlsEnabled = true,
+//                    myLocationButtonEnabled = true
+//                ),
+//                onMapClick = { latLng ->
+//                    selectedLocation = latLng
+//                }
+//            ) {
+//                selectedLocation?.let { location ->
+//                    Marker(
+//                        state = MarkerState(position = location),
+//                        title = "Selected Location"
+//                    )
+//                }
+//            }
+//
+//            if (selectedLocation == null) {
+//                Text(
+//                    text = "Tap on the map to select location",
+//                    modifier = Modifier
+//                        .align(Alignment.Center)
+//                        .background(
+//                            color = MaterialTheme.colorScheme.surface.copy(alpha = 0.8f),
+//                            shape = RoundedCornerShape(8.dp)
+//                        )
+//                        .padding(16.dp),
+//                    style = MaterialTheme.typography.bodyLarge
+//                )
+//            }
+//        }
+//    }
+//}
+
 //@OptIn(MapsComposeExperimentalApi::class, ExperimentalMaterial3Api::class)
 //@Composable
 //fun MapScreen(
