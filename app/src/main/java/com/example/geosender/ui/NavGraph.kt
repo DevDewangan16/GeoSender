@@ -43,42 +43,6 @@ fun NavGraph(
     }
 }
 
-
-//@Composable
-//fun NavGraph(
-//    navController: NavHostController = rememberNavController()
-//) {
-//    val application = LocalContext.current.applicationContext as Application
-//    val repository = LocationRepository(ApiClient.apiService)
-//
-//    NavHost(
-//        navController = navController,
-//        startDestination = "home"
-//    ) {
-//        composable("home") {
-//            val viewModel: LocationViewModel = viewModel(
-//                factory = LocationViewModelFactory(application, repository)
-//            )
-//            HomeScreen(
-//                viewModel = viewModel,
-//                onNavigateToMap = { navController.navigate("map") }
-//            )
-//        }
-//        composable("map") {
-//            val viewModel: LocationViewModel = viewModel(
-//                factory = LocationViewModelFactory(application, repository)
-//            )
-//            MapScreen(
-//                onLocationSelected = { location ->
-//                    viewModel.setLocation(location)
-//                    navController.popBackStack()
-//                },
-//                onBack = { navController.popBackStack() }
-//            )
-//        }
-//    }
-//}
-
 class LocationViewModelFactory(
     private val application: Application,
     private val repository: LocationRepository
