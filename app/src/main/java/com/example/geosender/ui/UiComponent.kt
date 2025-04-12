@@ -90,19 +90,22 @@ fun LocationCard(
                     Text(
                         text = "Address: $address",
                         style = MaterialTheme.typography.bodySmall,
-                        fontSize = 15.sp
+                        fontSize = 15.sp,
+                        color = Color.Black
                     )
                 }
 
                 Text(
                     text = "Latitude: ${location.latitude}",
                     style = MaterialTheme.typography.bodyMedium,
-                    fontSize = 15.sp
+                    fontSize = 15.sp,
+                    color = Color.Black
                 )
                 Text(
                     text = "Longitude: ${location.longitude}",
                     style = MaterialTheme.typography.bodyMedium,
-                    fontSize = 15.sp
+                    fontSize = 15.sp,
+                    color = Color.Black
                 )
             } else {
                 Text(
