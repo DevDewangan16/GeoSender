@@ -60,7 +60,9 @@ fun MapScreen(
                         )
                         onBack()  // Navigate back after setting location
                     }
-                }
+                },
+                containerColor = Color(0xFF00BB77),
+                contentColor = Color.White
             ) {
                 Icon(Icons.Default.Check, contentDescription = "Confirm Location")
             }
