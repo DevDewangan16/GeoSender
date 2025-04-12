@@ -37,6 +37,10 @@ import android.Manifest
 import android.content.Context
 import android.content.pm.PackageManager
 import android.location.LocationManager
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.ui.graphics.Color
 import androidx.core.content.ContextCompat
 
 
@@ -113,6 +117,7 @@ fun HomeScreen(
                 .padding(16.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
+            Spacer(modifier = Modifier.fillMaxWidth().height(20.dp))
             Text(
                 text = "Select Your Location",
                 style = MaterialTheme.typography.headlineSmall
@@ -186,19 +191,25 @@ fun HomeScreen(
             )
 
             // Submit Button
-            Button(
-                onClick = { viewModel.submitLocation() },
-                modifier = Modifier.fillMaxWidth(),
-                enabled = location != null && !isLoading
-            ) {
-                if (isLoading) {
-                    CircularProgressIndicator(
-                        modifier = Modifier.size(24.dp),
-                        color = MaterialTheme.colorScheme.onPrimary,
-                        strokeWidth = 2.dp
-                    )
-                } else {
-                    Text("Submit Location")
+            Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
+                Button(
+                    onClick = { viewModel.submitLocation() },
+                    modifier = Modifier.height(50.dp),
+                    enabled = location != null && !isLoading,
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = Color(0xFF0066CC)
+                    ),
+                    shape = MaterialTheme.shapes.medium
+                ) {
+                    if (isLoading) {
+                        CircularProgressIndicator(
+                            modifier = Modifier.size(24.dp),
+                            color = MaterialTheme.colorScheme.onPrimary,
+                            strokeWidth = 2.dp
+                        )
+                    } else {
+                        Text("Submit Location")
+                    }
                 }
             }
         }

@@ -51,9 +51,9 @@ fun LocationAppTheme(
     MaterialTheme(
         colorScheme = lightColorScheme(
             primary = Color(0xFF6200EE),
-            primaryContainer = Color(0xFFBB86FC),
+            primaryContainer = Color(0xFF00BB77),
             onPrimary = Color.White,
-            onPrimaryContainer = Color.Black,
+            onPrimaryContainer = Color.White,
             secondary = Color(0xFF03DAC6),
             background = Color(0xFFFFFFFF),
             surface = Color(0xFFFFFFFF),

@@ -1,5 +1,6 @@
 package com.example.geosender.ui
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -20,6 +21,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 import com.example.geosender.ui.data.LocationData
@@ -34,10 +36,11 @@ fun LocationButton(
     Button(
         onClick = onClick,
         modifier = modifier
+            .fillMaxWidth()
             .height(56.dp),
         colors = ButtonDefaults.buttonColors(
-            containerColor = MaterialTheme.colorScheme.primaryContainer,
-            contentColor = MaterialTheme.colorScheme.onPrimaryContainer
+            containerColor = Color(0xFF00BB77),
+            contentColor = Color.White
         ),
         shape = MaterialTheme.shapes.medium
     ) {
@@ -61,9 +64,13 @@ fun LocationCard(
     Card(
         modifier = modifier
             .fillMaxWidth()
-            .padding(16.dp),
-        shape = RoundedCornerShape(12.dp),
-        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
+            //.padding(16.dp),
+        ,shape = RoundedCornerShape(12.dp),
+        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
+        border = BorderStroke(2.dp,Color(0xFF00BB77)),
+        colors = CardDefaults.cardColors(
+            containerColor = Color.White
+        )
     ) {
         Column(
             modifier = Modifier.padding(16.dp)
@@ -71,7 +78,7 @@ fun LocationCard(
             Text(
                 text = "Selected Location",
                 style = MaterialTheme.typography.titleMedium,
-                color = MaterialTheme.colorScheme.primary
+                color = Color(0xFF00BB77)
             )
 
             Spacer(modifier = Modifier.height(8.dp))
