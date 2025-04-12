@@ -60,28 +60,6 @@ class LocationViewModel(
             _errorMessage.value = "No location selected"
         }
     }
-//    fun submitLocation() {
-//        _locationState.value?.let { location ->
-//            viewModelScope.launch {
-//                _isLoading.value = true
-//                _errorMessage.value = null
-//                _successMessage.value = null
-//
-//                try {
-//                    val response = repository.submitLocation(location)
-//                    if (response.isSuccessful) {
-//                        _successMessage.value = response.body()?.message ?: "Location submitted successfully"
-//                    } else {
-//                        _errorMessage.value = "Failed to submit location: ${response.code()}"
-//                    }
-//                } catch (e: Exception) {
-//                    _errorMessage.value = "Error: ${e.message}"
-//                } finally {
-//                    _isLoading.value = false
-//                }
-//            }
-//        }
-//    }
 
     fun clearMessages() {
         _errorMessage.value = null
