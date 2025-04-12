@@ -19,11 +19,6 @@ import com.example.geosender.ui.data.LocationData
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.compose.*
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
-import androidx.compose.animation.expandVertically
-import androidx.compose.animation.shrinkVertically
 
 @OptIn(MapsComposeExperimentalApi::class, ExperimentalMaterial3Api::class)
 @Composable
@@ -40,12 +35,7 @@ fun MapScreen(
         position = CameraPosition.fromLatLngZoom(initialLatLng, 15f)
     }
 
-    var selectedLocation by remember { mutableStateOf(initialLatLng) }
-    var showConfirmation by remember { mutableStateOf(false) }
-
-    LaunchedEffect(selectedLocation) {
-        showConfirmation = selectedLocation != null
-    }
+    var selectedLocation by remember { mutableStateOf<LatLng?>(initialLatLng) }
 
     Scaffold(
         topBar = {
@@ -59,26 +49,19 @@ fun MapScreen(
             )
         },
         floatingActionButton = {
-            AnimatedVisibility(
-                visible = showConfirmation,
-                enter = fadeIn() + expandVertically(),
-                exit = fadeOut() + shrinkVertically()
-            ) {
-                FloatingActionButton(
-                    onClick = {
-                        selectedLocation?.let { latLng ->
-                            onLocationSelected(
-                                LocationData(
-                                    latitude = latLng.latitude,
-                                    longitude = latLng.longitude
-                                )
+            FloatingActionButton(
+                onClick = {
+                    selectedLocation?.let { latLng ->
+                        onLocationSelected(
+                            LocationData(
+                                latitude = latLng.latitude,
+                                longitude = latLng.longitude
                             )
-                        }
-                    },
-                    modifier = Modifier.padding(8.dp)
-                ) {
-                    Icon(Icons.Default.Check, contentDescription = "Confirm")
+                        )
+                    }
                 }
+            ) {
+                Icon(Icons.Default.Check, contentDescription = "Confirm Location")
             }
         }
     ) { paddingValues ->
@@ -88,6 +71,10 @@ fun MapScreen(
                 cameraPositionState = cameraPositionState,
                 properties = MapProperties(
                     isMyLocationEnabled = true
+                ),
+                uiSettings = MapUiSettings(
+                    zoomControlsEnabled = true,
+                    myLocationButtonEnabled = true
                 ),
                 onMapClick = { latLng ->
                     selectedLocation = latLng
@@ -103,16 +90,15 @@ fun MapScreen(
 
             if (selectedLocation == null) {
                 Text(
-                    text = "Tap anywhere on the map to select location",
+                    text = "Tap on the map to select location",
                     modifier = Modifier
                         .align(Alignment.Center)
                         .background(
-                            color = MaterialTheme.colorScheme.surface.copy(alpha = 0.9f),
+                            color = MaterialTheme.colorScheme.surface.copy(alpha = 0.8f),
                             shape = RoundedCornerShape(8.dp)
                         )
                         .padding(16.dp),
-                    style = MaterialTheme.typography.bodyLarge,
-                    color = MaterialTheme.colorScheme.onSurface
+                    style = MaterialTheme.typography.bodyLarge
                 )
             }
         }
@@ -161,7 +147,7 @@ fun MapScreen(
 //                        )
 //                    }
 //                },
-//               // enabled = selectedLocation != null
+//                // enabled = selectedLocation != null
 //            ) {
 //                Icon(Icons.Default.Check, contentDescription = "Confirm Location")
 //            }
