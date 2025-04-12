@@ -1,9 +1,11 @@
 📍 **Locato: Smart Location Picker App**
 
 
+
 🚀 **Overview**
 
 **Locato** is a simple, modern Android application that allows users to select their current location either automatically using GPS or manually using a map interface. Once selected, the location is submitted to a dummy API endpoint in JSON format. This app is ideal for learning how to use location services, maps, and permissions in a clean MVVM architecture.
+
 
 
 🛠️ **Features**
@@ -23,6 +25,7 @@
 ✅ Toast Feedback – Instantly notify users of actions like location selection or submission status.
 
 
+
 📂 **Tech Stack**
 
 ✨ **Kotlin + Jetpack Compose** – Modern UI and logic handling
@@ -34,6 +37,7 @@
 📲 **Android Permissions API** + Accompanist – Runtime permissions management
 
 🚀 **Retrofit** – For sending location to API (or use URLConnection for simplicity)
+
 
 
 📊 **How It Works**
@@ -52,6 +56,7 @@ Example payload:
 ```
 
 
+
 🚀 **Getting Started**
 
 1. Clone the repository:
@@ -66,6 +71,7 @@ git clone https://github.com/yourusername/Locato.git
 3. Run the app:
 - Connect an Android device or emulator
 - Hit Run ▶️
+
 
 
 🤝 **Contributions**
