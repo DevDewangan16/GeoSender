@@ -133,19 +133,26 @@ fun HomeScreen(
 
             // Use Current Location Button
             if (isGettingLocation) {
-                Button(
-                    onClick = {},
-                    modifier = Modifier.fillMaxWidth()
-                        .height(56.dp),
-                    shape = MaterialTheme.shapes.medium,
-                    enabled = false
-                ) {
+                Box (modifier = Modifier.fillMaxSize()){
                     CircularProgressIndicator(
-                        modifier = Modifier.size(24.dp),
+                        modifier = Modifier.align(Alignment.Center),
                         color = Color(0xFF00BB77),
                         strokeWidth = 2.dp
                     )
                 }
+//                Button(
+//                    onClick = {},
+//                    modifier = Modifier.fillMaxWidth()
+//                        .height(56.dp),
+//                    shape = MaterialTheme.shapes.medium,
+//                    enabled = false
+//                ) {
+//                    CircularProgressIndicator(
+//                        modifier = Modifier.size(24.dp),
+//                        color = Color(0xFF00BB77),
+//                        strokeWidth = 2.dp
+//                    )
+//                }
             } else {
                 LocationButton(
                     text = "Use Current Location",

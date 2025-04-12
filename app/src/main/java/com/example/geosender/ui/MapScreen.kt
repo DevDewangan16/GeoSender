@@ -30,6 +30,7 @@ fun MapScreen(
     onBack: () -> Unit,
     initialLocation: LocationData? = null
 ) {
+    var isLoading by remember { mutableStateOf(true) }
     val context = LocalContext.current
     val cameraPositionState = rememberCameraPositionState()
 
@@ -98,6 +99,13 @@ fun MapScreen(
     ) { paddingValues ->
         // ... rest of your MapScreen code ...
         Box(modifier = Modifier.padding(paddingValues)) {
+            if (isLoading) {
+                CircularProgressIndicator(
+                    modifier = Modifier.align(Alignment.Center),
+                    color = Color(0xFF00BB77),
+                    strokeWidth = 2.dp
+                )
+            }
             GoogleMap(
                 modifier = Modifier.fillMaxSize(),
                 cameraPositionState = cameraPositionState,
@@ -110,7 +118,8 @@ fun MapScreen(
                 ),
                 onMapClick = { latLng ->
                     selectedLocation = latLng
-                }
+                },
+                onMapLoaded = { isLoading = false }
             ) {
                 selectedLocation?.let { location ->
                     Marker(
