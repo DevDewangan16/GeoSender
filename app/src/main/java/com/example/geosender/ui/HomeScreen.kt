@@ -200,7 +200,15 @@ fun HomeScreen(
             // Submit Button
             Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
                 Button(
-                    onClick = { viewModel.submitLocation() },
+                    onClick = {
+                        if (location?.address == null) {
+                            viewModel.setErrorMsg("Getting address... please wait")
+                            viewModel.reverseGeocode(location!!)
+                        } else {
+                            viewModel.submitLocation()
+                        }
+                        //viewModel.submitLocation()
+                              },
                     modifier = Modifier.height(50.dp),
                     enabled = location != null && !isLoading,
                     colors = ButtonDefaults.buttonColors(

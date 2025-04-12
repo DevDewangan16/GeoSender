@@ -24,6 +24,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.geosender.ui.data.LocationData
 
 @Composable
@@ -84,22 +85,25 @@ fun LocationCard(
             Spacer(modifier = Modifier.height(8.dp))
 
             if (location != null) {
-                Text(
-                    text = "Latitude: ${location.latitude}",
-                    style = MaterialTheme.typography.bodyMedium
-                )
-                Text(
-                    text = "Longitude: ${location.longitude}",
-                    style = MaterialTheme.typography.bodyMedium
-                )
-
                 location.address?.let { address ->
                     Spacer(modifier = Modifier.height(8.dp))
                     Text(
                         text = "Address: $address",
-                        style = MaterialTheme.typography.bodySmall
+                        style = MaterialTheme.typography.bodySmall,
+                        fontSize = 15.sp
                     )
                 }
+
+                Text(
+                    text = "Latitude: ${location.latitude}",
+                    style = MaterialTheme.typography.bodyMedium,
+                    fontSize = 15.sp
+                )
+                Text(
+                    text = "Longitude: ${location.longitude}",
+                    style = MaterialTheme.typography.bodyMedium,
+                    fontSize = 15.sp
+                )
             } else {
                 Text(
                     text = "No location selected",
