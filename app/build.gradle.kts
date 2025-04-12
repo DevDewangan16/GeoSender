@@ -1,3 +1,4 @@
+import java.io.FileInputStream
 import java.util.Properties
 
 plugins {
@@ -22,9 +23,20 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
-        // Add manifest placeholders for Maps API key
-        manifestPlaceholders["MAPS_API_KEY"] = project.properties["MAPS_API_KEY"] as? String ?: ""
-        buildConfigField("String", "MAPS_API_KEY", "\"${project.properties["MAPS_API_KEY"]}\"")
+        val localProperties = Properties().apply {
+            val localPropertiesFile = rootProject.file("local.properties")
+            if (localPropertiesFile.exists()) {
+                load(FileInputStream(localPropertiesFile))
+            }
+        }
+
+        val mapsApiKey = localProperties.getProperty("MAPS_API_KEY") ?: ""
+
+        // For BuildConfig access
+        buildConfigField("String", "MAPS_API_KEY", "\"$mapsApiKey\"")
+
+        // For manifest access
+        manifestPlaceholders["mapsApiKey"] = mapsApiKey
     }
 
 
